@@ -14,7 +14,7 @@ public class ProcessDelivery implements Runnable {
 
     @Override
     public void run() {
-        System.out.println("Processing Delivery for " + order.getOwner());
+        System.out.println("        Processing Delivery for " + order.getOwner());
 
         try {
             Thread.sleep(1000);
@@ -25,7 +25,7 @@ public class ProcessDelivery implements Runnable {
         order.setStatus( Status.getNext(order.getStatus()) );
 
 
-        System.out.println("Order Delivered!");
+        System.out.println("        Order Delivered!");
     }
     
 }

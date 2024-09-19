@@ -58,7 +58,7 @@ public class PipelineThreadPool extends Thread{
         executor.execute(activity);
         
         while(currentOrder.getStatus() == oldStatus){
-            wait(100);
+            sleep(100);
         }
 
         outQueue.add( currentOrder );

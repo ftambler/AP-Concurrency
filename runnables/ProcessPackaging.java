@@ -14,7 +14,7 @@ public class ProcessPackaging implements Runnable {
 
     @Override
     public void run() {
-        System.out.println("Packaging order for " + order.getOwner());
+        System.out.println("    Packaging order for " + order.getOwner());
 
         try {
             Thread.sleep(1000);
@@ -25,7 +25,7 @@ public class ProcessPackaging implements Runnable {
         order.setStatus( Status.getNext(order.getStatus()) );
 
 
-        System.out.println("Finished Packaging!");
+        System.out.println("    Finished Packaging!");
     }
     
 }

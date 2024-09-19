@@ -12,11 +12,11 @@ public class Main{
         PipelineManager pipelineManager = new PipelineManager(paymentProcessThreads,packagingProcessthreads,deliveryProcessThreads);
         pipelineManager.start();
 
-        // for (int i = 0; i < 100; i++) {
-        //     pipelineManager.pushOrder(new Order(100, 1, String.valueOf(i) ));
-        // }
+        for (int i = 0; i < 10; i++) {
+            pipelineManager.pushOrder(new Order(100, 1, String.valueOf(i) ));
+        }
         
-        pipelineManager.pushOrder(new Order(100, 1, "jorge" ));
+        // pipelineManager.pushOrder(new Order(100, 1, "jorge" ));
     
     
     }
