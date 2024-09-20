@@ -39,7 +39,6 @@ public class PipelineThreadPool extends Thread{
     public void runInputQueueOrder(Order currentOrder) throws InterruptedException{
         Runnable activity;
 
-
         switch (currentOrder.getStatus()) {
             case TOPROCESS:
                 activity = new ProcessPayment(currentOrder);
@@ -57,7 +56,7 @@ public class PipelineThreadPool extends Thread{
         
         Status oldStatus = currentOrder.getStatus();
 
-        executor.execute(activity);
+        executor.submit(activity);
         
         while(currentOrder.getStatus() == oldStatus){
             sleep(100);

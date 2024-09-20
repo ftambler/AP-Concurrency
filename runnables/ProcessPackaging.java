@@ -1,29 +1,19 @@
 package runnables;
 
 import models.Order;
-import models.Status;
 
 //Segundo paso
-public class ProcessPackaging implements Runnable {
-
-    private Order order;
+public class ProcessPackaging extends ProcessOrder {
 
     public ProcessPackaging(Order order) {
-        this.order = order;
+        super(order);
     }
 
     @Override
     public void run() {
-        System.out.println("    Packaging order for " + order.getOwner());
+        System.out.println("Packaging order for " + getOrder().getOwner());
 
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
-        order.setStatus( Status.getNext(order.getStatus()) );
-
+        super.run();
 
         System.out.println("    Finished Packaging!");
     }
