@@ -4,6 +4,8 @@ import java.util.Queue;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+import models.Order;
+import models.Status;
 import runnables.ProcessDelivery;
 import runnables.ProcessPackaging;
 import runnables.ProcessPayment;
@@ -62,6 +64,10 @@ public class PipelineThreadPool extends Thread{
         }
 
         outQueue.add( currentOrder );
+    }
+
+    public ExecutorService getExecutor() {
+        return executor;
     }
 
 }

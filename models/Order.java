@@ -1,4 +1,4 @@
-package resources;
+package models;
 
 public class Order {
     private String owner;

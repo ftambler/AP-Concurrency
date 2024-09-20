@@ -1,4 +1,4 @@
-import resources.Order;
+import models.Order;
 import resources.PipelineManager;
 
 public class Main{
@@ -16,6 +16,8 @@ public class Main{
             pipelineManager.pushOrder(new Order(100, 1, String.valueOf(i) ));
         }
         
+        // pipelineManager.stop();
+
         // pipelineManager.pushOrder(new Order(100, 1, "jorge" ));
     
     

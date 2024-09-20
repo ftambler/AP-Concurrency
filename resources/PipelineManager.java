@@ -3,6 +3,8 @@ package resources;
 import java.util.Queue;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
+import models.Order;
+
 public class PipelineManager {
     
     private Queue<Order> toProcess;
@@ -39,6 +41,13 @@ public class PipelineManager {
             return false;
         }
 
+    }
+
+    public void stop(){
+        paymentProcessingService.getExecutor().shutdown();
+        orderPackagingSerivice.getExecutor().shutdown();
+        deliveryService.getExecutor().shutdown();
+        System.out.println("Shutting down");
     }
 
 }

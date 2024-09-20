@@ -1,7 +1,7 @@
 package runnables;
 
-import resources.Order;
-import resources.Status;
+import models.Order;
+import models.Status;
 
 //Primer paso
 public class ProcessPayment implements Runnable {
