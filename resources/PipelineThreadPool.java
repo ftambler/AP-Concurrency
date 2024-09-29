@@ -1,23 +1,21 @@
 package resources;
 
-import java.util.Queue;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.PriorityBlockingQueue;
 
 import models.Order;
-import models.Status;
-import runnables.ProcessDelivery;
-import runnables.ProcessPackaging;
-import runnables.ProcessPayment;
 
 
 public class PipelineThreadPool extends Thread{
     
-    private Queue<Order> inQueue;
-    private Queue<Order> outQueue;
+    private PriorityBlockingQueue<Order> inQueue;
+    private PriorityBlockingQueue<Order> outQueue;
     private ExecutorService executor; 
 
-    public PipelineThreadPool(Queue<Order> inQueue, Queue<Order> outQueue, int threadAmount){
+    private boolean isRunning = false;
+
+    public PipelineThreadPool(PriorityBlockingQueue<Order> inQueue, PriorityBlockingQueue<Order> outQueue, int threadAmount){
         this.inQueue = inQueue;
         this.outQueue = outQueue;
         executor = Executors.newFixedThreadPool(threadAmount);
@@ -25,8 +23,10 @@ public class PipelineThreadPool extends Thread{
 
     @Override
     public void run() {
-        while (true) {
-            while (!inQueue.isEmpty()) {
+        this.isRunning = true;
+        
+        while (isRunning) {
+            if (!inQueue.isEmpty()) {
                 try {
                     runInputQueueOrder(inQueue.remove());
                 } catch (InterruptedException e) {
@@ -35,34 +35,12 @@ public class PipelineThreadPool extends Thread{
             }
         }
     }
-
+    
     public void runInputQueueOrder(Order currentOrder) throws InterruptedException{
-        Runnable activity;
-
-        switch (currentOrder.getStatus()) {
-            case TOPROCESS:
-                activity = new ProcessPayment(currentOrder);
-                break;
-            case TOPACKAGE:
-                activity = new ProcessPackaging(currentOrder);
-                break;    
-            case TODELIVER:
-                activity = new ProcessDelivery(currentOrder);
-                break;
-            default:
-                activity = null;
-                break;
-        }
+        Thread activity = Order.createOrder(currentOrder, outQueue);
         
-        Status oldStatus = currentOrder.getStatus();
-
         executor.submit(activity);
-        
-        while(currentOrder.getStatus() == oldStatus){
-            sleep(100);
-        }
 
-        outQueue.add( currentOrder );
     }
 
     public ExecutorService getExecutor() {
