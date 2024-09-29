@@ -16,10 +16,8 @@ public class Main{
             pipelineManager.pushOrder(new Order(100, 1, String.valueOf(i) ));
         }
         
+        // TODO
         // pipelineManager.stop();
 
-        // pipelineManager.pushOrder(new Order(100, 1, "jorge" ));
-    
-    
     }
 }
