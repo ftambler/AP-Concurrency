@@ -1,12 +1,12 @@
 package resources;
 
-import java.util.Queue;
+import java.util.concurrent.PriorityBlockingQueue;
 
 import models.Order;
 
 public class DeliveryService extends PipelineThreadPool {
 
-    public DeliveryService(Queue<Order> toDeliver, Queue<Order> finalized, int threadAmount) {
+    public DeliveryService(PriorityBlockingQueue<Order> toDeliver, PriorityBlockingQueue<Order> finalized, int threadAmount) {
         super(toDeliver, finalized, threadAmount);
         
     }
