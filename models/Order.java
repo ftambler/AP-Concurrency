@@ -45,7 +45,7 @@ public class Order implements Comparable<Order>{
         return Integer.compare(this.priority, o.getPriority());
     }
    
-    public static ProcessOrder createOrder(Order currentOrder, PriorityBlockingQueue<Order> outQueue){
+    public static ProcessOrder createOrderThread(Order currentOrder, PriorityBlockingQueue<Order> outQueue){
         switch (currentOrder.getStatus()) {
             case TOPROCESS:
                 return new ProcessPayment(currentOrder, outQueue);
