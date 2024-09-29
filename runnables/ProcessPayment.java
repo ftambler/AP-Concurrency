@@ -1,12 +1,14 @@
 package runnables;
 
+import java.util.concurrent.PriorityBlockingQueue;
+
 import models.Order;
 
 //Primer paso
 public class ProcessPayment extends ProcessOrder {
 
-    public ProcessPayment(Order order) {
-        super(order);
+    public ProcessPayment(Order order, PriorityBlockingQueue<Order> outQueue) {
+        super(order, outQueue);
     }
 
     @Override
@@ -15,7 +17,7 @@ public class ProcessPayment extends ProcessOrder {
 
         super.run();
 
-        System.out.println("    Payment Success!");
+        System.out.println(" » Payment Success!");
     }
     
 }
