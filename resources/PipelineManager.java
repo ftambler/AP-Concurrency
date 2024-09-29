@@ -1,26 +1,25 @@
 package resources;
 
-import java.util.Queue;
-import java.util.concurrent.ConcurrentLinkedQueue;
+import java.util.concurrent.PriorityBlockingQueue;
 
 import models.Order;
 
 public class PipelineManager {
     
-    private Queue<Order> toProcess;
-    private Queue<Order> toPackage;
-    private Queue<Order> toDeliver;
-    private Queue<Order> finalized;
+    private PriorityBlockingQueue<Order> toProcess;
+    private PriorityBlockingQueue<Order> toPackage;
+    private PriorityBlockingQueue<Order> toDeliver;
+    private PriorityBlockingQueue<Order> finalized;
 
     private PaymentProcessingService paymentProcessingService;
     private OrderPackagingService orderPackagingSerivice;
     private DeliveryService deliveryService;
 
     public PipelineManager(int paymentProcessThreads, int packagingProcessthreads, int deliveryProcessThreads){
-        toProcess = new ConcurrentLinkedQueue<>();
-        toPackage = new ConcurrentLinkedQueue<>();
-        toDeliver = new ConcurrentLinkedQueue<>();
-        finalized = new ConcurrentLinkedQueue<>();
+        toProcess = new PriorityBlockingQueue<>();
+        toPackage = new PriorityBlockingQueue<>();
+        toDeliver = new PriorityBlockingQueue<>();
+        finalized = new PriorityBlockingQueue<>();
 
         paymentProcessingService = new PaymentProcessingService(toProcess, toPackage, paymentProcessThreads);
         orderPackagingSerivice = new OrderPackagingService(toPackage, toDeliver, packagingProcessthreads);
