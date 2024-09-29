@@ -17,7 +17,7 @@ public class ProcessPayment extends ProcessOrder {
 
         super.run();
 
-        System.out.println(" » Payment Success!");
+        System.out.println(" » Payment Success on " + getOrder().getOwner());
     }
     
 }

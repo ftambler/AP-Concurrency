@@ -17,7 +17,7 @@ public class ProcessPackaging extends ProcessOrder {
 
         super.run();
 
-        System.out.println("\t » Finished Packaging!");
+        System.out.println("\t » Finished Packaging for " + getOrder().getOwner());
     }
     
 }

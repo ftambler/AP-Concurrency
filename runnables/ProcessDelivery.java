@@ -17,7 +17,7 @@ public class ProcessDelivery extends ProcessOrder {
 
         super.run();
 
-        System.out.println("\t\t » Order Delivered!");
+        System.out.println("\t\t » Order Delivered to " + getOrder().getOwner());
     }
     
 }
