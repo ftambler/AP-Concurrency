@@ -60,7 +60,7 @@ public class PipelineThreadPool extends Thread{
 
         executor.shutdown();
         try {
-            executor.awaitTermination(3500, TimeUnit.SECONDS);
+            executor.awaitTermination(20, TimeUnit.SECONDS);
         } catch (InterruptedException e) {              
             executor.shutdownNow();
         }
