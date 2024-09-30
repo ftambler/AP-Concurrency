@@ -7,9 +7,9 @@ public class Main{
     public static void main(String[] args) {
         
         //Thread amounts
-        int paymentProcessThreads = 1;
-        int packagingProcessthreads = 1;
-        int deliveryProcessThreads = 1;
+        int paymentProcessThreads = 10;
+        int packagingProcessthreads = 10;
+        int deliveryProcessThreads = 10;
         
         //Initialize Manager and Services
         PipelineManager pipelineManager = new PipelineManager(paymentProcessThreads,packagingProcessthreads,deliveryProcessThreads);
@@ -35,16 +35,28 @@ public class Main{
             }
         }).start();
         
-        //Submit Orders
-        for (int i = 0; i < 10; i++) {
-            try {
-                boolean pushedOrder = pipelineManager.pushOrder(new Order(100, 1, String.valueOf(i) ));
-                if(!pushedOrder) break;
+        //Submit Orders N orders (Priority 0-9)
+        // int n = 100;
+        // for (int i = 0; i < n; i++) {
+        //     try {
+        //         boolean pushedOrder = pipelineManager.pushOrder(new Order(100, i % 10, String.valueOf(i) ));
+        //         if(!pushedOrder) break;
 
-                Thread.sleep(500);
-            } catch (InterruptedException e){}
-        }
-        
+        //         Thread.sleep(500);
+        //     } catch (InterruptedException e){}
+        // }
+
+        //Submit Custom Orders
+        pipelineManager.pushOrder(new Order(100, 10, "Antonio" ));
+        pipelineManager.pushOrder(new Order(100, 7, "Belen" ));
+        pipelineManager.pushOrder(new Order(100, 1, "Carlos" ));
+        pipelineManager.pushOrder(new Order(100, 3, "Daniel" ));
+        pipelineManager.pushOrder(new Order(100, 4, "Estefano" ));
+        pipelineManager.pushOrder(new Order(100, 9, "Federico" ));
+        pipelineManager.pushOrder(new Order(100, 1, "Gustavo" ));
+        pipelineManager.pushOrder(new Order(100, 3, "Hector" ));
+        pipelineManager.pushOrder(new Order(100, 5, "Ignacio" ));
+        pipelineManager.pushOrder(new Order(100, 9, "Juan Jose" ));
         
     }
 }
