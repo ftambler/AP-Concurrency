@@ -7,9 +7,9 @@ public class Main{
     public static void main(String[] args) {
         
         //Thread amounts
-        int paymentProcessThreads = 5;
-        int packagingProcessThreads = 5;
-        int deliveryProcessThreads = 5;
+        int paymentProcessThreads = 35;
+        int packagingProcessThreads = 35;
+        int deliveryProcessThreads = 35;
         
         //Initialize Manager and Services
         PipelineManager pipelineManager = new PipelineManager(paymentProcessThreads,packagingProcessThreads,deliveryProcessThreads);
@@ -38,12 +38,7 @@ public class Main{
         //Submit Orders N orders (Priority 0-9)
          int n = 100;
          for (int i = 0; i < n; i++) {
-             try {
-                 boolean pushedOrder = pipelineManager.pushOrder(new Order(100, i % 10, String.valueOf(i) ));
-                 if(!pushedOrder) break;
-
-                 Thread.sleep(500);
-             } catch (InterruptedException e){}
+             boolean pushedOrder = pipelineManager.pushOrder(new Order(100, i % 10, String.valueOf(i) ));
          }
 
         //Submit Custom Orders
