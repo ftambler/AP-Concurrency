@@ -11,6 +11,9 @@ public class ProcessPackaging extends ProcessOrder {
         super(order, outQueue);
     }
 
+    /**
+     * Run function to package orders
+     */
     @Override
     public void run() {
         System.out.println("\tPackaging order for " + getOrder().getOwner());

@@ -25,13 +25,18 @@ public class PipelineThreadPool extends Thread{
         executor = Executors.newFixedThreadPool(threadAmount);
         monitor = new Object();
     }
-    
+
+
     @Override
     public void run() {
         this.isRunning = true;
         runInputQueue();
     }
-    
+
+    /**
+     * Consumes from input queue until it's empty
+     * If it is empty and the thread has finished the monitor will be released
+     */
     public void runInputQueue(){
         while (isRunning) {
             if (!inQueue.isEmpty()) {
@@ -45,7 +50,11 @@ public class PipelineThreadPool extends Thread{
             this.monitor.notify();
         }
     }
-    
+
+    /**
+     * Run next process depending on order state
+     * @param currentOrder Current order being processed
+     */
     public void runOrder(Order currentOrder){
         Thread activity = Order.createOrderThread(currentOrder, outQueue);
         executor.submit(activity);

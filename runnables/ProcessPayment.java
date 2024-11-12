@@ -11,6 +11,9 @@ public class ProcessPayment extends ProcessOrder {
         super(order, outQueue);
     }
 
+    /**
+     * Run function to process payments
+     */
     @Override
     public void run() {
         System.out.println("Processing Payment for " + getOrder().getOwner());

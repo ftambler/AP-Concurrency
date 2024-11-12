@@ -4,6 +4,11 @@ import java.util.concurrent.PriorityBlockingQueue;
 
 import models.Order;
 
+/**
+ * Pipeline Manager class
+ * <p>It creates the priority blocking queues for every part of the process</p>
+ * <p>Initializes all services</p>
+ */
 public class PipelineManager {
     
     private PriorityBlockingQueue<Order> toProcess;
@@ -29,13 +34,21 @@ public class PipelineManager {
         
         isRunning = true;
     }
-    
+
+    /**
+     * Starts all services
+     */
     public void start(){
         paymentProcessingService.start();
         orderPackagingSerivice.start();
         deliveryService.start();
     }
-    
+
+    /**
+     * Pushes an order to the initial first priority queue
+     * @param newOrder New order to be pushed
+     * @return True if Pipeline is running
+     */
     public boolean pushOrder(Order newOrder){
         if(!isRunning){
             return false;
@@ -43,7 +56,10 @@ public class PipelineManager {
         toProcess.add(newOrder);
         return true;        
     }
-    
+
+    /**
+     * Stops Pipeline
+     */
     public void stop(){
         this.isRunning = false;
         try {

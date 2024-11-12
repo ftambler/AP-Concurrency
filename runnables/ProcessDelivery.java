@@ -11,6 +11,9 @@ public class ProcessDelivery extends ProcessOrder {
         super(order, outQueue);
     }
 
+    /**
+     * Run function to process deliveries
+     */
     @Override
     public void run() {
         System.out.println("\t\tProcessing Delivery for " + getOrder().getOwner());
